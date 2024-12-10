@@ -13,60 +13,86 @@
             font-family: 'Segoe UI', sans-serif;
         }
 
-        /* Navbar Styles */
+        /* Navbar */
         nav {
+            background: transparent; /* Background transparan */
+            padding: 1rem 5%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
-            padding: 1.5rem 5%;
-            position: absolute;
-            top: 0;
+            position: absolute; /* Ubah menjadi absolute */
+            width: 100%; /* Pastikan menutupi seluruh lebar */
+            top: 0; /* Posisikan di bagian atas */
             left: 0;
-            right: 0;
-            z-index: 1000;
+            z-index: 10;
         }
 
         .logo {
             color: white;
             font-size: 1.5rem;
             font-weight: bold;
+            text-decoration: none;
         }
 
         .nav-links {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
             align-items: center;
+            margin-left: auto;
+            margin-right: 2rem;
         }
 
         .nav-links a {
             color: white;
             text-decoration: none;
             font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #FFD700;
         }
 
         .nav-links a.active {
             font-weight: bold;
+            color: white;
+        }
+
+        .nav-links a.active:hover {
+            color: #FFD700;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
         }
 
         .login-btn {
-            padding: 0.6rem 2rem;
+            padding: 0.5rem 2rem;
             border: 1px solid #FFD700;
             background: transparent;
             color: #FFD700;
             border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
         .register-btn {
-            padding: 0.6rem 2rem;
+            padding: 0.5rem 2rem;
             background: #FFD700;
             border: none;
             color: #000;
             border-radius: 25px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .register-btn:hover {
+            background: rgba(255, 215, 0, 0.8);
         }
 
         .hero {
@@ -298,7 +324,7 @@
         }
 
         .explore {
-            background: #4A665B;
+            background: #4B7065;
             border-radius: 50px;
             margin: -50px 0 0 0;
             padding: 10rem 0;
@@ -583,13 +609,12 @@
         }
 
         .footer {
-            background: #4A665B;
+            background: #38544C;
             border-radius: 0;
-            margin: -40px 0 0 0;
             padding: 5rem 5% 2rem;
             position: relative;
             z-index: 6;
-            margin-top: 20px;
+            margin: 0;
         }
 
         .footer-container {
@@ -598,6 +623,7 @@
             display: grid;
             grid-template-columns: 2fr 1fr 1fr 1fr;
             gap: 3rem;
+            margin-top: 0;
         }
 
         .footer-column h3 {
@@ -743,7 +769,7 @@
         }
 
         .footer {
-            background: #4A665B;
+            background: #38544C;
             border-radius: 0;
             margin: -40px 0 0 0;
             padding: 5rem 5% 2rem;
@@ -766,15 +792,17 @@
     </style>
 </head>
 <body>
-    <nav>
-        <div class="logo">SudutPurwokerto</div>
+<nav>
+        <a href="#" class="logo">SudutPurwokerto</a>
         <div class="nav-links">
-            <a href="#" class="active">Beranda</a>
-            <a href="#">Kuliner</a>
+            <a href="#">Beranda</a>
+            <a href="#" class="active">Kuliner</a>
             <a href="#">Wisata</a>
             <a href="#">Event</a>
-            <button class="login-btn">Login</button>
-            <button class="register-btn">Register</button>
+        </div>
+        <div class="auth-buttons">
+            <a href="#" class="login-btn">Login</a>
+            <a href="#" class="register-btn">Register</a>
         </div>
     </nav>
 
