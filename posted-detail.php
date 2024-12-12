@@ -38,17 +38,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
 
         // Menyimpan komentar ke database
         $queryKomentar = "INSERT INTO komentar (id_postingan, type_postingan, id_akun, isi_komentar) 
-                  VALUES ('$id_postingan', '$type_postingan', '$id_akun', '$isi_komentar')";
-                
-                if (mysqli_query($conn, $queryKomentar)) {
-                echo "Komentar berhasil disimpan.";
-                ?>
-                <meta http-equiv="refresh" content="2; url=posted-detail.php?type=<?php echo $type; ?>&id=<?php echo $id; ?>"/>
-                <?php
-            } else {
-                echo "Error: " . mysqli_error($conn);
-            }
+        VALUES ('$id_postingan', '$type_postingan', '$id_akun', '$isi_komentar')";
+      
+            if (mysqli_query($conn, $queryKomentar)) {
 
+            echo "<script>
+            alert('Komentar berhasil disimpan.');
+            window.location.href = 'posted-detail.php?type=$type&id=$id';
+            </script>";
+            } else {
+            echo "Error: " . mysqli_error($conn);
+            }
     } else {
         echo "Anda harus login untuk menambahkan komentar.";
     }
@@ -222,9 +222,18 @@ if ($row = mysqli_fetch_assoc($result)) {
                     </div>
                 </form>
             </div>
-
+            <?php endif; ?>
+            
             <!-- Garis pembatas -->
             <div style="border-top: 1px solid #000; margin-bottom: 2rem;"></div>
+            
+                <!-- Untuk yang belum login -->
+            <?php if (!isset($_SESSION['id_akun'])): ?>
+                <p style="margin-bottom: 2rem;">
+                Silahkan <a href="login.php" style="color: #4B7065; text-decoration: none;"><b>Login</b></a> Untuk Memberikan Komentar.
+                </p>
+            <?php endif; ?>
+
             <div style="margin-bottom: 2rem;">
                 <h2 style="font-size: 2rem; display: flex; align-items: center; margin: 0;">
                     Komentar 
@@ -236,39 +245,14 @@ if ($row = mysqli_fetch_assoc($result)) {
                                 margin-left: 1rem;
                                 position: relative;
                                 top: 2px;">
-                        3
-                    </span>
-                </h2>
-            </div>
-
-            <?php else: ?>
-                 <!-- Garis pembatas -->
-                <div style="border-top: 1px solid #000; margin-bottom: 2rem;"></div>
-                <p style="margin-bottom: 2rem;">
-                Silahkan <a href="login.php" style="color: #4B7065; text-decoration: none;"><b>Login</b></a> Untuk Memberikan Komentar.
-                </p>
-                <div style="margin-bottom: 2rem;">
-                <h2 style="font-size: 2rem; display: flex; align-items: center; margin: 0;">
-                    Komentar 
-                    <span style="background: #8AB0A6; 
-                                color: white; 
-                                padding: 0.2rem 0.8rem; 
-                                border-radius: 20px; 
-                                font-size: 1rem;
-                                margin-left: 1rem;
-                                position: relative;
-                                top: 2px;">
-                                 <?php 
+                         <?php 
                         $jumlahkomentarQuery = "SELECT * FROM komentar WHERE id_postingan = $id AND type_postingan = '$type'";
                         $jumlahkomentarResult = mysqli_query($conn, $jumlahkomentarQuery);
                         echo mysqli_num_rows($jumlahkomentarResult);
-                        ?>  
+                        ?>
                     </span>
                 </h2>
-                </div>
-            <?php endif; ?>
-
-
+            </div>
 
             <!-- Komentar Items -->
             <?php
