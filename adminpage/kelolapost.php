@@ -92,6 +92,7 @@ if (!$result) {
                         <input type="hidden" name="post_id" value="<?php echo $row['id']; ?>">
                         <button type="submit" name="delete" class="" onclick="return confirm('Apakah Anda yakin ingin menghapus postingan ini?');">Delete</button>
                     </form>
+                    <a href="viewpost.php?type=<?php echo $type; ?>&id=<?php echo $row['id']; ?>">Lihat</a>
                 </td>
             </tr>
             <?php
