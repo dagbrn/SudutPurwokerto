@@ -20,8 +20,11 @@ function displayPosts($result, $type) {
                     <a href="posted-detail.php?type=<?php echo $type; ?>&id=<?php echo $row['id']; ?>">
                         <h4><?php echo $row['nama']; ?></h4>
                     </a>
-                    <?php if (isset($row['tanggal'])): ?>
-                        <p class="date"><?php echo $row['tanggal']; ?></p>
+                    <?php if (isset($row['tanggal'])): 
+                        $tanggal = new DateTime($row['tanggal']);
+                        $formattedTanggal = $tanggal->format('d F Y');
+                    ?>
+                        <p class="date"><?php echo $formattedTanggal ?></p>
                     <?php endif; ?>
                     <p><i class="fas fa-map-marker-alt"></i><?php echo $row['lokasi']; ?></p>
                 </div>
@@ -46,29 +49,8 @@ function displayPosts($result, $type) {
 
 </head>
 <body>
-    <nav>
-        <div class="logo">SudutPurwokerto</div>
-        <div class="nav-links">
-            <a href="../sudutpurwokerto/" class="active">Beranda</a>
-            <a href="posted.php?type=kuliner">Kuliner</a>
-            <a href="posted.php?type=wisata">Wisata</a>
-            <a href="posted.php?type=event">Event</a>
 
-            <?php
-            $login = isset($_SESSION["login"]) && $_SESSION["login"];
-            $profilePicture = 'asset/pp.png';
-
-            if ($login): ?>
-                <a href="logout.php">Logout</a>
-                <img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="profile-pic">
-            <?php else: ?>
-                <a href="login.php" class="login-btn">Login</a>
-                <a href="register.php" class="register-btn">Register</a>
-            <?php endif; ?>
-            
-            
-        </div>
-    </nav>
+    <?php include "navbar.php"; ?>
 
     <section class="hero">
         <div class="hero-content">

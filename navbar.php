@@ -1,35 +1,23 @@
-<?php
-session_start();
-?>
-
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Navbar</title>
-    <link rel="stylesheet" href="css/navbar.css">
-</head>
-<body>
-<nav class="navbar">
+<nav>
         <div class="logo">SudutPurwokerto</div>
-        <ul class="menu">
-            <li><a href="../sudutpurwokerto/">Beranda</a></li>
-            <li><a href="posted.php?type=kuliner">Kuliner</a></li>
-            <li><a href="posted.php?type=wisata">Wisata</a></li>
-            <li><a href="posted.php?type=event">Event</a></li>
+        <div class="nav-links">
+            <a href="../sudutpurwokerto/" class="active">Beranda</a>
+            <a href="posted.php?type=kuliner">Kuliner</a>
+            <a href="posted.php?type=wisata">Wisata</a>
+            <a href="posted.php?type=event">Event</a>
+
             <?php
             $login = isset($_SESSION["login"]) && $_SESSION["login"];
             $profilePicture = 'asset/pp.png';
 
             if ($login): ?>
-                <li><a href="logout.php">Logout</a></li>
-                <li><img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="profile-pic"></li>
+                <a href="logout.php">Logout</a>
+                <img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="profile-pic">
             <?php else: ?>
-                <li><a href="login.php">Login</a></li>
-                <li><a href="register.php">Register</a></li>
+                <a href="login.php" class="login-btn">Login</a>
+                <a href="register.php" class="register-btn">Register</a>
             <?php endif; ?>
-        </ul>
+            
+            
+        </div>
     </nav>
-</body>
-</html>
