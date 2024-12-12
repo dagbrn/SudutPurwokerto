@@ -18,6 +18,7 @@ if(isset($_POST['login'])){
             
             // Simpan Session
             $_SESSION["login"] = true;
+            $_SESSION["id_akun"] = $row["id_akun"];
             $_SESSION["username"] = $row["username"];
             $_SESSION["role"] = $row["role"];
 
@@ -43,33 +44,57 @@ if(isset($_POST['login'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
-        <div class="login">
-            <h2>Login</h2>
 
-            <?php if(isset($error)) : ?>
-            <p style="color: red; font-style: italic;">Username / Password Salah!</p>
-            <?php endif; ?>
 
+    <?php if(isset($error)) : ?>
+        <script>
+            alert('Username atau Password salah!');
+        </script>
+    <?php endif; ?>
+
+    <div class="left-section"></div>
+    <div class="right-section">
+        <div class="login-container">
+            <h1>Login</h1>
+            <h2>SudutPurwokerto</h2>
+            
             <form action="" method="POST">
-                <div>
+                <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" name="username" id="username" required>
+                    <input type="text" id="username" name="username" placeholder="Masukan username anda" required>
                 </div>
 
-                <div>
+                <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" name="password" id="password" required>
+                    <div class="password-field">
+                        <input type="password" id="password" name="password" placeholder="Masukan password anda" required>
+                        <span class="password-toggle"></span>
+                    </div>
                 </div>
-                <div>
-                <button type="submit" class="" name="login">Masuk</button>
-                </div>
-                <div class="">
-                    <p>Belum punya Akun?<a href="register.php">Register</a></p>
-                </div>
+
+                <button type="submit" class="login-btn" name="login">Masuk</button>
             </form>
+
+            <div class="register-link">
+                <span>Belum punya akun? </span>
+                <a href="register.php">Register</a>
+            </div>
         </div>
+    </div>
+
+    <script>
+        document.querySelector('.password-toggle').addEventListener('click', function() {
+            const passwordInput = document.querySelector('#password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+            } else {
+                passwordInput.type = 'password';
+            }
+        });
+    </script>
 </body>
 </html>

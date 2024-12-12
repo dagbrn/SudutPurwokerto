@@ -22,8 +22,8 @@
     function registrasi($data){
       global $conn;
 
-      $namaLengkap = mysqli_real_escape_string($data["namaLengkap"]);
-      $email = mysqli_real_escape_string($data["email"]);
+      $namaLengkap = mysqli_real_escape_string($conn, $data["nama_lengkap"]);
+      $email = mysqli_real_escape_string($conn, $data["email"]);
       $username = strtolower($data["username"]);
       $password = mysqli_real_escape_string($conn, $data["password"]);
       $password2 = mysqli_real_escape_string($conn, $data["password2"]);
