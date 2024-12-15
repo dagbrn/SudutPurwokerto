@@ -1,6 +1,6 @@
 # SudutPurwokerto
 
-**SudutPurwokerto** adalah adalah website yang menyediakan rekomendasi lengkap tempat kuliner, wisata, dan event di kota Purwokerto. Website ini dirancang untuk membantu pengguna dalam menemukan berbagai tempat menarik dan pengalaman terbaik di Purwokerto. Website ini dibuat untuk memenuhi Tugas Responsi 2 Praktikum Pemrogram Web.
+**SudutPurwokerto** adalah adalah website yang menyediakan rekomendasi lengkap tempat kuliner, wisata, dan event di kota Purwokerto. Website ini dirancang untuk membantu pengguna dalam menemukan berbagai tempat menarik dan pengalaman seru di Purwokerto. Website ini dibuat untuk memenuhi Tugas Responsi 2 Praktikum Pemrogram Web.
 
 ## Fitur✨
 1. Menampilkan berbagai rekomendasi tempat kuliner, wisata, dan event di Purwokerto.
@@ -19,9 +19,8 @@
 ## Struktur Project📂
 
 ## Demo Website💻
-Klik GIF untuk melihat full video
-
-Tonton Full di youtube
+Tonton demo website SudutPurwokerto di YouTube melalui link berikut:
+[Demo SudutPurwokerto](https://www.youtube.com/watch?v=GkqchF9lrTc)
 
 ## Cara Install dengan XAMPP🚀
 1. Clone repository ini.
