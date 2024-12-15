@@ -19,8 +19,9 @@
 ## Struktur Project📂
 
 ## Demo Website💻
-Tonton demo website SudutPurwokerto di YouTube melalui link berikut:
-[Demo SudutPurwokerto](https://www.youtube.com/watch?v=GkqchF9lrTc)
+Tonton demo website SudutPurwokerto melalui Youtube:
+
+[![Demo SudutPurwokerto](https://img.youtube.com/vi/VLZMET2jci8/maxresdefault.jpg)](https://youtu.be/VLZMET2jci8)
 
 ## Cara Install dengan XAMPP🚀
 1. Clone repository ini.
