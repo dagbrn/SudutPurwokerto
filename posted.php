@@ -47,15 +47,23 @@ $result = mysqli_query($conn, $query);
 
             <?php
                 $login = isset($_SESSION["login"]) && $_SESSION["login"];
-                $profilePicture = 'asset/pp.png';
+                if ($login) {
+                    $queryProfile = "SELECT foto FROM akun WHERE id_akun = " . $_SESSION["id_akun"];
+                    $fotoProfile = mysqli_query($conn, $queryProfile);
+                    $fotoData = mysqli_fetch_assoc($fotoProfile);
+                    $profilePicture = 'userimage/' . $fotoData['foto'];
 
-                if ($login): ?>
-                    <a href="logout.php" class="logout-btn">Logout</a>
-                    <img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="profile-pic">
-                <?php else: ?>
+                    // Cek apakah foto ada
+                    if (empty($fotoData['foto']) || !file_exists($profilePicture)) {
+                        $profilePicture = 'userimage/pp.png';
+                    }
+                    ?>
+                    <a href="logout.php">Logout</a>
+                    <a href="profile.php"><img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="profile-pic"></a>
+                <?php } else { ?>
                     <a href="login.php" class="login-btn">Login</a>
                     <a href="register.php" class="register-btn">Register</a>
-                <?php endif; ?>
+                <?php } ?>
         </div>
     </nav>
 

@@ -76,15 +76,23 @@ if ($row = mysqli_fetch_assoc($result)) {
 
             <?php
                 $login = isset($_SESSION["login"]) && $_SESSION["login"];
-                $profilePicture = 'asset/pp.png';
+                if ($login) {
+                    $queryProfile = "SELECT foto FROM akun WHERE id_akun = " . $_SESSION["id_akun"];
+                    $fotoProfile = mysqli_query($conn, $queryProfile);
+                    $fotoData = mysqli_fetch_assoc($fotoProfile);
+                    $profilePicture = 'userimage/' . $fotoData['foto'];
 
-                if ($login): ?>
-                    <a href="logout.php" class="logout-btn">Logout</a>
-                    <img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="profile-pic">
-                <?php else: ?>
+                    // Cek apakah foto ada
+                    if (empty($fotoData['foto']) || !file_exists($profilePicture)) {
+                        $profilePicture = 'asset/pp.png';
+                    }
+                    ?>
+                    <a href="logout.php">Logout</a>
+                    <a href="profile.php"><img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="profile-pic"></a>
+                <?php } else { ?>
                     <a href="login.php" class="login-btn">Login</a>
                     <a href="register.php" class="register-btn">Register</a>
-                <?php endif; ?>
+                <?php } ?>
         </div>
     </nav>
 
@@ -226,7 +234,6 @@ if ($row = mysqli_fetch_assoc($result)) {
             
             <!-- Garis pembatas -->
             <div style="border-top: 1px solid #000; margin-bottom: 2rem;"></div>
-            
                 <!-- Untuk yang belum login -->
             <?php if (!isset($_SESSION['id_akun'])): ?>
                 <p style="margin-bottom: 2rem;">
@@ -256,8 +263,8 @@ if ($row = mysqli_fetch_assoc($result)) {
 
             <!-- Komentar Items -->
             <?php
-                // Menampilkan komentar
-                $komentarQuery = "SELECT k.isi_komentar, k.tanggal_komentar, a.username 
+                // Menampilkan komentar 
+                $komentarQuery = "SELECT k.isi_komentar, k.tanggal_komentar, a.username, a.foto 
                                 FROM komentar k
                                 JOIN akun a ON k.id_akun = a.id_akun
                                 WHERE k.id_postingan = $id AND k.type_postingan = '$type'
@@ -270,6 +277,11 @@ if ($row = mysqli_fetch_assoc($result)) {
 
                     while ($komentar = mysqli_fetch_assoc($komentarResult)) {
                         $username = htmlspecialchars($komentar['username']);
+                        $fotoProfile = $komentar['foto'];
+                            $fotoPath = "userimage/" . $fotoProfile;
+                            if (empty($fotoProfile) || !file_exists($fotoPath)) {
+                                $fotoPath = "userimage/pp.png";
+                            }
                         $tanggal = htmlspecialchars($komentar['tanggal_komentar']);
                             $tanggalKomen = new DateTime($tanggal);
                             $tanggalKomentar = $tanggalKomen->format('j F Y'); 
@@ -277,7 +289,7 @@ if ($row = mysqli_fetch_assoc($result)) {
 
                         echo '
                         <div style="display: flex; gap: 1rem;">
-                            <img src="asset/pp.png" alt="User Avatar" style="width: 48px; height: 48px; border-radius: 50%; background: #eee;">
+                            <img src="' . $fotoPath . '" alt="User Avatar" style="width: 48px; height: 48px; border-radius: 50%; background: #eee;">
                             <div>
                                 <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
                                     <h3 style="font-size: 1.1rem;">' . $username . '</h3>

@@ -1,6 +1,7 @@
-<nav>
+    <nav>
         <div class="logo">SudutPurwokerto</div>
         <div class="nav-links">
+
             <a href="../sudutpurwokerto/" class="active">Beranda</a>
             <a href="posted.php?type=kuliner">Kuliner</a>
             <a href="posted.php?type=wisata">Wisata</a>
@@ -8,7 +9,7 @@
 
             <?php
             $login = isset($_SESSION["login"]) && $_SESSION["login"];
-            $profilePicture = 'asset/pp.png';
+            $profilePicture = 'userimage/pp.png';
 
             if ($login): ?>
                 <a href="logout.php">Logout</a>

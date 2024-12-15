@@ -48,8 +48,8 @@
 
       $password = password_hash($password, PASSWORD_DEFAULT);
   
-      mysqli_query($conn, "INSERT INTO akun (nama_lengkap, email, username, password, role) 
-      VALUES('$namaLengkap', '$email', '$username', '$password','user')");
+      mysqli_query($conn, "INSERT INTO akun (nama_lengkap, email, username, password, role, foto) 
+      VALUES('$namaLengkap', '$email', '$username', '$password','user','pp.png')");
 
       return mysqli_affected_rows($conn); 
 
