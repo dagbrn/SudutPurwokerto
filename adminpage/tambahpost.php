@@ -359,7 +359,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                                 <div class="form-group">
                                     <label>Waktu</label>
-                                    <input type="time" class="form-control" name="jam">
+                                    <input type="text" class="form-control" name="jam">
                                 </div>
                                 <div class="form-group">
                                     <label>Tiket Masuk</label>

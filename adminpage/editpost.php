@@ -9,6 +9,11 @@ if (!$conn) {
 $type = isset($_GET['type']) ? $_GET['type'] : '';
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
+$queryAdmin = "SELECT nama_lengkap AS nama, foto FROM akun WHERE id_akun = " . $_SESSION["id_akun"];
+$informasiAdmin = mysqli_query($conn, $queryAdmin);
+$dataAdmin = mysqli_fetch_assoc($informasiAdmin);
+
+
 if ($type == 'kuliner') {
     $title = "Edit Kuliner";
     $query = "SELECT nama_kuliner AS nama, lokasi_kuliner AS lokasi, 
@@ -55,7 +60,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $tanggal = isset($_POST['tanggal']) ? $_POST['tanggal'] : null;
     $tambahan = isset($_POST['tambahan']) ? $_POST['tambahan'] : null;
 
-
     // Query untuk memperbarui data
     if ($type == 'kuliner') {
         $update_query = "UPDATE tempat_kuliner SET 
@@ -81,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             lokasi_event = '$lokasi', 
             deskripsi_event = '$deskripsi', 
             tanggal_event = '$tanggal', 
-            waktu_event = '$waktu', 
+            waktu_event = '$jam', 
             tiket_event = '$harga', 
             socmed_event = '$tambahan' 
             WHERE id_event = $id";
@@ -100,84 +104,274 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name=" viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 20px 40px;
+            background-color: rgb(255, 251, 239);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .admin-text {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .container {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .sidebar {
+            width: 250px;
+        }
+        
+        .sidebar a{
+            text-decoration: none;
+        }
+
+        .menu-item {
+            display: flex;
+            align -items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            margin: 5px 0;
+            border-radius: 10px;
+            color: #333;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .menu-item.active {
+            background-color: #D7EAE4;
+        }
+
+
+        .content {
+            flex: 1;
+            background-color: #D7EAE4;
+            border-radius: 20px;
+            padding: 40px;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .form-layout {
+            display: flex;
+            gap: 60px;
+        }
+
+        .left-section, .right-section {
+            width: 45%;
+        }
+
+        .form-group {
+            margin-bottom: 35px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #96B6AB;
+            border-radius: 12px;
+            font-size: 14px;
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-cancel {
+            padding: 12px 40px;
+            border: 2px solid #FFD966;
+            background: #fff;
+            color: #FFD966;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .btn-submit {
+            padding: 12px 40px;
+            border: none;
+            background: #FFD966;
+            color: black;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .btn-cancel:hover {
+            background-color: rgba(255, 217, 102, 0.1);
+        }
+
+        .btn-submit:hover {
+            background-color: #ffd042;
+        }
+    </style>
 </head>
 <body>
-    <h3 > Edit <?php echo htmlspecialchars(ucfirst($type)); ?></h3>
+    <div class="header">
+        <h1>SudutPurwokerto</h1>
+        <div class="admin-text">
+            <img src="../userimage/pp.png" width="24" height="24">
+            <?php echo $dataAdmin['nama']; ?>
+        </div>
+    </div>
 
-    <form action="" method="post" enctype="multipart/form-data">
-        <!-- Nama -->
-        <div>
-            <label for="nama">Nama</label>
-            <input type="text" id="nama" name="nama" value="<?php echo htmlspecialchars($row['nama']); ?>" autocomplete="off" required>
+    <div class="container">
+        <div class="sidebar">
+            <a href="../adminpage/">
+                <div class="menu-item <?php echo $currentPage === 'index.php' ? 'active' : ''; ?>">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M4 13h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1zm0 8h6c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1zm10 0h6c.55 0 1-.45 1-1v-8c0-.55-.45-1-1-1h-6c-.55 0-1 .45-1 1v8c0 .55.45 1 1 1zM13 4v4c0 .55.45 1 1 1h6c.55 0 1-.45 1-1V4c0-.55-.45-1-1-1h-6c-.55 0-1 .45-1 1z" fill="currentColor"/>
+                    </svg>
+                    Dashboard
+                </div>
+            </a>
+            <a href="kelolapost.php?type=kuliner">
+                <div class="menu-item <?php echo isset($_GET['type']) && $_GET['type'] === 'kuliner' ? 'active' : ''; ?>">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/>
+                    </svg>
+                    Kelola Kuliner
+                </div>
+            </a>
+            <a href="kelolapost.php?type=wisata">
+                <div class="menu-item <?php echo isset($_GET['type']) && $_GET['type'] === 'wisata' ? 'active' : ''; ?>">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M14 6l-4.22 5.63 1.25 1.67L14 9.33 19 16h-8.46l-4.01-5.37L1  18h22L14 6zM5 16l1.52-2.03L8.04 16H5z"/>
+                    </svg>
+                    Kelola Wisata
+                </div>
+            </a>
+            <a href="kelolapost.php?type=event">
+                <div class="menu-item <?php echo isset($_GET['type']) && $_GET['type'] === 'event' ? 'active' : ''; ?>">
+                    <svg width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z"/>
+                    </svg>
+                    Kelola Event
+                </div>
+            </a>
         </div>
 
-        <!-- Lokasi -->
-        <div>
-            <label for="lokasi">Lokasi</label>
-            <input type="text" name="lokasi" id="lokasi" value="<?php echo htmlspecialchars($row['lokasi']); ?>" required>
-        </div>
+        <div class="content">
+            <h2>Edit <?php echo htmlspecialchars(ucfirst($type)); ?></h2>
+            
+            <div class="form-container">
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="form-layout">
+                    <div class="left-section">
+                        <div class="form-group">
+                            <label>Nama</label>
+                            <input type="text" class="form-control" name="nama" value="<?php echo htmlspecialchars($row['nama']); ?>" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Lokasi</label>
+                            <input type="text" class="form-control" name="lokasi" value="<?php echo htmlspecialchars($row['lokasi']); ?>" required>
+                        </div>
 
-        <!-- Input Khusus Berdasarkan Jenis Postingan -->
-        <?php if ($type == 'kuliner'): ?>
-            <div>
-                <label for="harga">Harga Rata-Rata</label>
-                <input type="text" name="harga" id="harga" value="<?php echo htmlspecialchars($row['harga']); ?>" required>
-            </div>
-            <div>
-                <label for="jam">Jam Operasional</label>
-                <input type="text" name="jam" id="jam" value="<?php echo htmlspecialchars($row['jam']); ?>" required>
-            </div>
-            <div>
-                <label for="tambahan">Menu Unggulan</label>
-                <input type="text" name="tambahan" id="tambahan" value="<?php echo htmlspecialchars($row['tambahan']); ?>" required>
-            </div>
-        <?php elseif ($type == 'wisata'): ?>
-            <div>
-                <label for="harga">Harga Tiket Masuk</label>
-                <input type="text" name="harga" id="harga" value="<?php echo htmlspecialchars($row['harga']); ?>" required>
-            </div>
-            <div>
-                <label for="jam">Jam Operasional</label>
-                <input type="text" name="jam" id="jam" value="<?php echo htmlspecialchars($row['jam']); ?>" required>
-            </div>
-            <div>
-                <label for="tambahan">Fasilitas</label>
-                <input type="text" name="tambahan" id="tambahan" value="<?php echo htmlspecialchars($row['tambahan']); ?>" required>
-            </div>
-        <?php elseif ($type == 'event'): ?>
-            <div>
-                <label for="tanggal">Tanggal</label>
-                <input type="date" name="tanggal" id="tanggal" value="<?php echo htmlspecialchars($row['tanggal']); ?>" required>
-            </div>
-            <div>
-                <label for="jam">Waktu</label>
-                <input type="time" name="jam" id="jam" value="<?php echo htmlspecialchars($row['waktu']); ?>" required>
-            </div>
-            <div>
-                <label for="harga">Tiket Masuk</label>
-                <input type="text" name="harga" id="harga" value="<?php echo htmlspecialchars($row['harga']); ?>" required>
-            </div>
-            <div>
-                <label for="tambahan">Social Media</label>
-                <input type="text" name="tambahan" id="tambahan" value="<?php echo htmlspecialchars($row['tambahan']); ?>" required>
-            </div>
-        <?php endif; ?>
+                        <?php if ($type == 'kuliner'): ?>
+                                <div class="form-group">
+                                    <label>Harga Rata-Rata</label>
+                                    <input type="text" class="form-control" name="harga" value="<?php echo htmlspecialchars($row['harga']); ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Jam Operasional</label>
+                                    <input type="text" class="form-control" name="jam" value="<?php echo htmlspecialchars($row['jam']); ?>">
+                                </div>
+                            <?php elseif ($type == 'wisata'): ?>
+                                <div class="form-group">
+                                    <label>Harga Tiket Masuk</label>
+                                    <input type="text" class="form-control" name="harga" value="<?php echo htmlspecialchars($row['harga']); ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Jam Operasional</label>
+                                    <input type="text" class="form-control" name="jam" value="<?php echo htmlspecialchars($row['jam']); ?>">
+                                </div>
+                            <?php elseif ($type == 'event'): ?>
+                                <div class="form-group">
+                                    <label>Tanggal</label>
+                                    <input type="date" class="form-control" name="tanggal" value="<?php echo htmlspecialchars($row['tanggal']); ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Waktu</label>
+                                    <input type="text" class="form-control" name="jam" value="<?php echo htmlspecialchars($row['waktu']); ?>">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tiket Masuk</label>
+                                    <input type="text" class="form-control" name="harga" value="<?php echo htmlspecialchars($row['harga']); ?>">
+                                </div>
+                            <?php endif; ?>
+                        </div>
 
-        <!-- Deskripsi -->
-        <div>
-            <label for="deskripsi">Deskripsi</label>
-            <textarea name="deskripsi" id="deskripsi" rows="4" required><?php echo htmlspecialchars($row['deskripsi']); ?></textarea>
+                        <div class="right-section">
+                            <div class="form-group">
+                                <label>Deskripsi</label>
+                                <textarea class="form-control" name="deskripsi" rows="4"><?php echo htmlspecialchars($row['deskripsi']); ?></textarea>
+                            </div>
+
+                            <?php if ($type == 'kuliner'): ?>
+                                <div class="form-group">
+                                    <label>Menu Unggulan</label>
+                                    <textarea class="form-control" name="tambahan" rows="4"><?php echo htmlspecialchars($row['tambahan']); ?></textarea>
+                                </div>
+                            <?php elseif ($type == 'wisata'): ?>
+                                <div class="form-group">
+                                    <label>Fasilitas</label>
+                                    <textarea class="form-control" name="tambahan" rows="4"><?php echo htmlspecialchars($row['tambahan']); ?></textarea>
+                                </div>
+                            <?php elseif ($type == 'event'): ?>
+                                <div class="form-group">
+                                    <label>Social Media</label>
+                                    <textarea class="form-control" name="tambahan" rows="4"><?php echo htmlspecialchars($row['tambahan']); ?></textarea>
+                                </div>
+                            <?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit" name="batal" class="btn-cancel">Batal</button>
+                    <button type="submit" class="btn-submit">Simpan</button>
+                </div>
+            </form>
+            </div>
         </div>
-        
-        <!-- Tombol Submit -->
-        <div>
-            <button type="submit" name="batal">Batal</button>
-        </div>
-        <div>
-            <button type="submit">Update</button>
-        </div>
-    </form>
+    </div>
 </body>
 </html>

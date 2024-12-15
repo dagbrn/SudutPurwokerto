@@ -61,7 +61,7 @@ function displayPosts($result, $type) {
                 <?php
                 $login = isset($_SESSION["login"]) && $_SESSION["login"];
                 if ($login) {
-                    $queryProfile = "SELECT foto FROM akun WHERE id_akun = " . $_SESSION["id_akun"];
+                    $queryProfile = "SELECT role, foto FROM akun WHERE id_akun = " . $_SESSION["id_akun"];
                     $fotoProfile = mysqli_query($conn, $queryProfile);
                     $fotoData = mysqli_fetch_assoc($fotoProfile);
                     $profilePicture = 'userimage/' . $fotoData['foto'];
@@ -72,6 +72,9 @@ function displayPosts($result, $type) {
                     }
                     ?>
                     <a href="logout.php">Logout</a>
+                    <?php if($fotoData['role'] == "admin"):?>
+                    <a href="adminpage/">Admin</a> 
+                    <?php endif; ?>
                     <a href="profile.php"><img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="profile-pic"></a>
                 <?php } else { ?>
                     <a href="login.php" class="login-btn">Login</a>

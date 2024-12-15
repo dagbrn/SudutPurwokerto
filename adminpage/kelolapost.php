@@ -134,8 +134,8 @@ if (!$result) {
         
         .add-button {
             background-color: #D7EAE4;
-            border: 2px solid #96B6AB;
-            color: #96B6AB;
+            border: 2px solid #4b7065;
+            color: #4b7065;
             padding: 8px 16px;
             border-radius: 8px;
             font-size: 16px;
@@ -267,7 +267,12 @@ if (!$result) {
                             <td><?php echo $row['id']; ?></td>
                             <td><?php echo $row['nama']; ?></td>
                             <td><?php echo date('d-m-Y', strtotime($row['tanggal'])); ?></td>
-                            <td><?php echo isset($row['komentar']) ? $row['komentar'] : ''; ?></td>
+                            <td><?php 
+                               $jumlahkomentarQuery = "SELECT * FROM komentar WHERE id_postingan = '" . $row['id'] . "' AND type_postingan = '$type'";
+                                $jumlahkomentarResult = mysqli_query($conn, $jumlahkomentarQuery);
+                                echo mysqli_num_rows($jumlahkomentarResult);
+                                ?>
+                            </td>
                             <td class="action-buttons">
                                 <a href="editpost.php?type=<?php echo $type; ?>&id=<?php echo $row['id']; ?>">
                                     <button class="edit-btn">

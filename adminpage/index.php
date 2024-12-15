@@ -123,7 +123,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>SudutPurwokerto</h1>
+        <a href="../" style="text-decoration: none; color: black;"><h1>SudutPurwokerto</h1></a>
         <div class="admin-text">
             <img src="../userimage/pp.png" width="24" height="24">
             <?php echo $dataAdmin['nama']; ?>

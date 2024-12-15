@@ -7,7 +7,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] == false) {
     exit;
 }
 
-$queryAkun = "SELECT nama_lengkap AS nama, email, username, foto FROM akun WHERE id_akun = " . $_SESSION["id_akun"];
+$queryAkun = "SELECT nama_lengkap AS nama, email, username, role, foto FROM akun WHERE id_akun = " . $_SESSION["id_akun"];
 $akun = mysqli_query($conn, $queryAkun);
 $akunData = mysqli_fetch_assoc($akun);
 $profilePicture = 'userimage/' . $akunData['foto'];
@@ -95,7 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
         <a href="posted.php?type=event" class="<?php echo ($type == 'event') ? 'active' : ''; ?>">Event</a>
         <?php if (isset($_SESSION["login"]) && $_SESSION["login"]) { ?>
             <a href="logout.php">Logout</a>
- <a href="profile.php"><img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="profile-pic"></a>
+            <?php if($akunData['role'] == "admin"):?>
+            <a href="adminpage/">Admin</a> 
+            <?php endif; ?>
+            <a href="profile.php"><img src="<?php echo $profilePicture; ?>" alt="Profile Picture" class="profile-pic"></a>
         <?php } else { ?>
             <a href="login.php" class ="login-btn">Login</a>
             <a href="register.php" class="register-btn">Register</a>
