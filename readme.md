@@ -56,10 +56,7 @@
  ```
 
 ## Demo Aplikasi💻
-Klik GIF untuk melihat full video
-
-Tonton Full di youtube
-
+Untuk melihat demo aplikasi bisa klik [disini](https://www.youtube.com/watch?v=VLZMET2jci8)
 
 ## Cara Install dengan XAMPP🚀
 1. Clone repository ini.
