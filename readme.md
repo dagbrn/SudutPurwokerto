@@ -1,9 +1,8 @@
 # SudutPurwokerto
 
-## Deskripsi Aplikasi🌟
-SudutPurwokerto adalah adalah aplikasi berbasis web yang menyediakan rekomendasi lengkap tempat kuliner, wisata, dan event di kota Purwokerto. Aplikasi ini dirancang untuk membantu pengunjung atau warga lokal menemukan pengalaman terbaik yang ditawarkan di Purwokerto. Aplikasi ini dibuat untuk memenuhi tugas Responsi 2 Praktikum Pemrogram Web.
+**SudutPurwokerto** adalah adalah website yang menyediakan rekomendasi lengkap tempat kuliner, wisata, dan event di kota Purwokerto. Website ini dirancang untuk membantu pengguna dalam menemukan berbagai tempat menarik dan pengalaman terbaik di Purwokerto. Website ini dibuat untuk memenuhi Tugas Responsi 2 Praktikum Pemrogram Web.
 
-## Fitur Aplikasi✨
+## Fitur✨
 1. Menampilkan berbagai rekomendasi tempat kuliner, wisata, dan event di Purwokerto.
 2. Menyediakan detail lengkap tempat wisata, seperti lokasi, deskripsi, fasilitas, harga tiket masuk, dan jam operasional.
 3. Menyediakan detail lengkap tempat wisata, seperti lokasi, deskripsi, menu unggulan, fasilitas, harga rata-rata, dan jam operasional.
@@ -12,23 +11,17 @@ SudutPurwokerto adalah adalah aplikasi berbasis web yang menyediakan rekomendasi
 6. Menyediakan dashboard admin untuk mengelola postingan dan komentar.
 
 ## Teknologi yang digunakan🛠️
-1. HTML
-2. CSS
-3. JavaScript
-4. PHP
-5. MySQL
-6. Visual Studio Code
-7. XAMPP
-8. Git
+1. **Frontend**: HTML, CSS, dan JavaScript
+2. **Backend**: PHP
+3. **Database**: MySQL
+4. **Tools Pengembangan**: Visual Studio Code, XAMPP, dan Git
 
 ## Struktur Project📂
 
-
-## Demo Aplikasi💻
+## Demo Website💻
 Klik GIF untuk melihat full video
 
 Tonton Full di youtube
-
 
 ## Cara Install dengan XAMPP🚀
 1. Clone repository ini.
