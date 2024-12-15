@@ -24,7 +24,7 @@ SudutPurwokerto adalah adalah aplikasi berbasis web yang menyediakan rekomendasi
 ## Struktur Project📂
 
 
-## Demo Aplikasi
+## Demo Aplikasi💻
 Klik GIF untuk melihat full video
 
 Tonton Full di youtube
@@ -32,15 +32,15 @@ Tonton Full di youtube
 
 ## Cara Install dengan XAMPP🚀
 1. Clone repository ini.
-2. Pindahkan folder project ke direktori 'htdocs' pada XAMPP.
+2. Pindahkan folder project ke direktori `htdocs` pada XAMPP.
 3. Buka XAMPP Control Panel dan jalankan Apache dan MySQL.
-4. Buka phpMyAdmin melalui browser 'localhost/phpmyadmin'.
-5. Buat database baru dengan nama sudutpurwokerto dan import file 'sudutpurwokerto.sql' ke database yang sudah dibuat.
-6. Sesuaikan pengaturan koneksi database pada file 'config.php' (jika diperlukan).
-7. Buka browser dan akses aplikasi melalui 'http://localhost/sudutpurwokerto'.
+4. Buka phpMyAdmin melalui browser `localhost/phpmyadmin`.
+5. Buat database baru dengan nama sudutpurwokerto dan import file `sudutpurwokerto.sql` ke database yang sudah dibuat.
+6. Sesuaikan pengaturan koneksi database pada file `config.php` (jika diperlukan).
+7. Buka browser dan akses aplikasi melalui `http://localhost/sudutpurwokerto`.
 8. Selesai.
 
-## Kontributor
+## Kontributor👥
 1. Darrell Gibran (H1D023060/darrell.gibran@mhs.unsoed.ac.id)
 2. Nabila Rizki Banati (H1D023086/nabila.banati@mhs.unsoed.ac.id)
 3. Muhammad Ilham Rafiqi (H1D023112/muhammad.rafiqi@mhs.unsoed.ac.id)
